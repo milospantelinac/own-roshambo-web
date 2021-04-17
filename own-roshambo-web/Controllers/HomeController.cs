@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using own_roshambo_web.Models;
+using OwnRoshamboWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace own_roshambo_web.Controllers
+namespace OwnRoshamboWeb.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace own_roshambo_web.Models
+namespace OwnRoshamboWeb.Models
 {
     public class ErrorViewModel
     {

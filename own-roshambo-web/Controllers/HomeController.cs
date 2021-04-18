@@ -1,26 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using own_roshambo_web.Models;
-using System;
-using System.Collections.Generic;
+using OwnRoshamboWeb.Interfaces.Helpers;
+using OwnRoshamboWeb.Models;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace own_roshambo_web.Controllers
+namespace OwnRoshamboWeb.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ITokenHelper _tokenHelper;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ITokenHelper tokenHelper)
         {
             _logger = logger;
+            _tokenHelper = tokenHelper;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var model = _tokenHelper.GetUserFromClaims(User.Claims);
+            return View(model);
         }
 
         public IActionResult Privacy()

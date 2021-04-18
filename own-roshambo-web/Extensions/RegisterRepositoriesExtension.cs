@@ -2,6 +2,7 @@
 using OwnRoshamboWeb.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
+using OwnRoshamboWeb.Interfaces.Repositories;
 
 namespace OwnRoshamboWeb.Extensions
 {
@@ -10,7 +11,8 @@ namespace OwnRoshamboWeb.Extensions
         public static IServiceCollection RegisterDatabase(this IServiceCollection services, string connectionString)
         {
             return services
-                .AddDbContext<RoshamboDbContext>(options => options.UseSqlServer(connectionString));
+                .AddDbContext<RoshamboDbContext>(options => options.UseSqlServer(connectionString))
+                .AddScoped<IUserRepository, UserRepository>();
         }
         public static IApplicationBuilder MigrateDatabase(this IApplicationBuilder builder)
         {

@@ -1,4 +1,5 @@
 ﻿using OwnRoshamboWeb.Models;
+using OwnRoshamboWeb.Models.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,6 @@ namespace OwnRoshamboWeb.Interfaces.Services
 {
     public interface IAuthService
     {
-        Task<UserModel> Login(string email, string password);
+        Task<LoginModel> Login(string email, string password);
     }
 }

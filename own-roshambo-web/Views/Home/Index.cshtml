@@ -3,7 +3,60 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome @Model.Username</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container-other text-center">
+    <h1 class="welcome-text display-4">&#129302; Welcome <span class="welcome-text__user">@Model.Username</span></h1>
+    <div class="container-main__sources">
+        <div class="sources--cms">
+            <h3 class="card-title d-flex align-items-center"><span class="site-dot mr-2">&#128994;</span>Room 1</h3>
+            <p class="card-text">Members: <span class="card-text__count member-count">1/2</span></p>
+            <button type="button" class="btn btn-blue">Join in room</button>
+        </div>
+        <div class="sources--markdown">
+            <h3 class="card-title d-flex align-items-center"><span class="site-dot mr-2">&#128994;</span>Room 2</h3>
+            <p class="card-text">Members: <span class="card-text__count member-count">1/2</span></p>
+            <button type="button" class="btn btn-blue">Join in room</button>
+        </div>
+        <div class="sources--data">
+            <h3 class="card-title d-flex align-items-center"><span class="site-dot mr-2">&#128994;</span>Room 3</h3>
+            <p class="card-text">Members: <span class="member-count">2/2</span><span class="card-text__status member-status"> (is full)</span></p>
+            <button type="button" class="btn btn-blue" disabled>Join in room</button>
+        </div>
+        <div class="sources--data">
+            <h3 class="card-title d-flex align-items-center"><span class="site-dot mr-2">&#128994;</span>Room 4</h3>
+            <p class="card-text">Members: <span class="card-text__count member-count">1/2</span></p>
+            <button type="button" class="btn btn-blue">Join in room</button>
+        </div>
+        <div class="sources--data">
+            <h3 class="card-title d-flex align-items-center"><span class="site-dot mr-2">&#128994;</span>Room 5</h3>
+            <p class="card-text">Members: <span class="card-text__count member-count">1/2</span></p>
+            <button type="button" class="btn btn-blue">Join in room</button>
+        </div>
+        <div class="sources--data">
+            <h3 class="card-title d-flex align-items-center"><span class="site-dot mr-2">&#128994;</span>Room 6</h3>
+            <p class="card-text">Members: <span class="card-text__count member-count">1/2</span></p>
+            <button type="button" class="btn btn-blue">Join in room</button>
+        </div>
+    </div>
+    <svg viewbox="0 0 10 100">
+        <line x1="5" x2="5" y1="0" y2="100" />
+    </svg>
+    <div class="container-main__build">
+        <div class="build--powered">
+            <svg viewbox="0 0 100 100">
+                <circle cx="50" cy="50" r="50" />
+            </svg>
+            <p>powered by</p>
+            <h3>GraphQL</h3>
+        </div>
+        <div class="build--stack">
+            HTML · CSS · React
+        </div>
+    </div>
+    <svg viewbox="0 0 10 100">
+        <line x1="5" x2="5" y1="0" y2="100" />
+    </svg>
+    <div class="container-main__deploy">
+        <h3>Static Web Host</h3>
+        <p>Amazon S3, Netlify, GitHub Pages, Surge.sh, Aerobatic, Now.sh, & many more.</p>
+    </div>
 </div>

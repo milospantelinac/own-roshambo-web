@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - RoshamboApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.16.5/sweetalert2.min.css" integrity="sha512-1ZnBKRTKQpSWa+zTPLIvikrThliiXRIUAk7vYALF8lpHpkUI8y9kynkCtmjpxGRiF4Gic9cXcbHrcAP3CPif4Q==" crossorigin="anonymous" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -20,23 +21,24 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item ml-auto mr-2">
-                                <a class="nav-link text-white btn btn-success" asp-area="" asp-controller="Auth" asp-action="Logout">New Game</a>
+                                <a class="nav-link text-white btn btn-success create-game">&#127922; Create Game</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white btn btn-primary" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
+                                <a class="nav-link text-white btn btn-primary" asp-area="" asp-controller="Auth" asp-action="Logout">&#128682; Logout</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
         }
-            @RenderBody()
-            <footer>
-                <p class="footer-text">Power by .NET 5 &#9889; SignalR</p>
-            </footer>
-        </section>
+        @RenderBody()
+        <footer>
+            <p class="footer-text">Power by .NET 5 &#9889; SignalR</p>
+        </footer>
+    </section>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.16.5/sweetalert2.min.js" integrity="sha512-kJNgV52Jjb/u70EOUTvh1PWcldbRxfMNPWpkSLfNbG3SjzBY5sJDGmosAGyiJPjAjmYjxPWQ+YoMmkZgeedskw==" crossorigin="anonymous"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

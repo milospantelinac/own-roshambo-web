@@ -1,71 +1,778 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿@import url("https://fonts.googleapis.com/css?family=Mukta:300,400,700");
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+.btn-red {
+    color: #fff;
+    background-color: #f1511b;
+    border-color: #f1511b;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.btn-red:hover {
+    color: #fff;
+    background-color: #f05f2e;
+    border-color: #f05f2e;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.btn-blue {
+    color: #fff;
+    background-color: #00adef;
+    border-color: #00adef;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.btn-blue:hover {
+    color: #fff;
+    background-color: #21b3eb;
+    border-color: #21b3eb;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+.card-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #555;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+.card-text {
+    color: #000;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+.card-text__status {
+    color: #f1511b;
+    font-weight: 600;
+}
+
+.welcome-text {
+    margin-bottom: 80px;
+}
+
+.welcome-text__user {
+    color: #555;
+    font-weight: 400;
+}
+
+.fake-email,
+.fake-password,
+.close-button {
+    color: #000;
+}
+
+.game-alert-card {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-alert-card--realtime-icon {
+    font-size: 72px;
+    position: absolute;
+    top: 0;
+    right: -25px;
+}
+
+.game-alert-card--ai-icon {
+    position: absolute;
+    top: 0;
+    right: -44px;
+    font-size: 72px;
+}
+
+.game-alert-card--disabled {
+    cursor: default;
+    opacity: 0.5;
+}
+
+.game-alert-card-title {
+    text-align: left;
+    font-size: 20px;
+    color: #555;
+    font-weight: 600;
+}
+
+.game-alert-card-text {
+    text-align: left;
+    max-width: 253px;
+    line-height: 18px;
+}
+
+.game-alert-card-soon {
+    margin: 0;
+    line-height: 0;
+    margin-left: 10px;
+    color: red;
+}
+
+.login-accounts-trigger {
+    position: fixed;
+    bottom: 20px;
+    right: 70px;
+    height: 48px;
+    width: 48px;
+    background: #fff;
+    border-radius: 50%;
+    border: 1px solid #e0e0e0;
+    -webkit-box-shadow: -1px 3px 15px 0 rgba(0,0,0,.06);
+    box-shadow: -1px 3px 15px 0 rgba(0,0,0,.06);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    opacity: 0;
+    -webkit-transform: translateY(40px) rotate(360deg);
+    transform: translateY(40px) rotate(360deg);
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    cursor: pointer
+}
+
+.login-accounts-trigger.is-active {
+    opacity: 1;
+    -webkit-transform: translateY(0) rotate(0);
+    transform: translateY(0) rotate(0)
+}
+
+.login-accounts-trigger svg {
+    height: 20px;
+    width: 20px
+}
+
+.login-accounts-panel {
+    position: fixed;
+    bottom: 20px;
+    right: 70px;
+    width: 320px;
+    border: 1px solid #ededed;
+    border-radius: 6px;
+    background: #fff;
+    opacity: 0;
+    -webkit-transform: translateY(40px);
+    transform: translateY(40px);
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out
+}
+
+.login-accounts-panel.is-active {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0)
+}
+
+.login-accounts-panel .panel-inner {
+    position: relative;
+    height: 100%;
+    width: 100%
+}
+
+.login-accounts-panel .panel-inner .close-button {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    height: 36px;
+    width: 36px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    z-index: 3;
+    cursor: pointer
+}
+
+.login-accounts-panel .panel-inner .close-button svg {
+    height: 18px;
+    width: 18px;
+    stroke: #4a4a4a;
+    stroke-width: 1.4px
+}
+
+.login-accounts-panel .panel-inner .header {
+    padding: 16px 20px 6px 20px
+}
+
+.login-accounts-panel .panel-inner .header h3 {
+    font-family: "Montserrat",sans-serif;
+    font-weight: 600;
+    color: #4a4a4a;
+    font-size: .95rem;
+    margin-bottom: 6px
+}
+
+.login-accounts-panel .panel-inner .header p {
+    font-size: .9rem;
+    color: #999
+}
+
+.login-accounts-panel .panel-inner .login-block {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 12px 0;
+    margin: 0 20px;
+    border-bottom: 1px solid #ededed;
+    cursor: pointer
+}
+
+.login-accounts-panel .panel-inner .login-block:hover img {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+    opacity: 1
+}
+
+.login-accounts-panel .panel-inner .login-block:last-child {
+    border-bottom: none
+}
+
+.login-accounts-panel .panel-inner .login-block img {
+    display: block;
+    border-radius: 50%;
+    height: 38px;
+    width: 38px;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+    opacity: .6;
+    -webkit-transition: all .3s;
+    transition: all .3s
+}
+
+.login-accounts-panel .panel-inner .login-block .meta {
+    margin-left: 12px
+}
+
+.login-accounts-panel .panel-inner .login-block .meta > span {
+    display: block;
+    line-height: 1.1
+}
+
+.login-accounts-panel .panel-inner .login-block .meta > span span {
+    font-size: .9rem;
+    padding-left: 4px
+}
+
+.login-accounts-panel .panel-inner .login-block .meta > span label {
+    text-transform: uppercase;
+    color: #999;
+    font-size: .65rem
+}
+
+
+.tooltip,
+.container-main__sources:before,
+.container-main__build:before,
+.container-main__deploy:before {
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    color: #fff;
+    background: #ffb238;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2.5px;
+}
+
+.card,
+.container-main__sources div,
+.container-main__build div {
+    line-height: 2;
+    background: #fff;
+    padding: 1.2rem 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px #e6e6e6;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    min-height: 100vh;
+    width: 100%;
+    font-family: 'Mukta', sans-serif;
+    color: #5027d5;
+    background: #5027D5;
 }
-.footer {
+
+.main-logo {
   position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  top: 20px;
+  left: 20px;
+}
+
+.main-logo__text {
+    color: #000;
+    font-weight: 600;
+}
+
+.site-dot {
+    font-size: 10px;
+}
+
+.navbar-main {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.container-login,
+.container-game {
+    padding: 28vh 0;
+    width: 100%;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-game {
+    padding: 23vh 0;
+}
+
+.container-other {
+    padding: 15vh 0;
+}
+
+.container-main {
+    position: relative;
+    margin: 5vh 2.5vw;
+    background: #fff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 95%;
+}
+
+    .container-main svg {
+        height: 5rem;
+    }
+
+        .container-main svg line {
+            stroke: #5027d5;
+            stroke-width: 3px;
+            stroke-linecap: round;
+            stroke-dasharray: 2px 20px;
+            animation: animateline 5s linear both infinite;
+        }
+
+h3 {
+    font-size: 1.1rem;
+    color: #411fb2;
+}
+
+p {
+    font-size: 0.95rem;
+    font-weight: 300;
+}
+
+.container-main__sources {
+    display: flex;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: #f9f9f9;
+    position: relative;
+    max-width: 970px;
+    flex-wrap: wrap;
+}
+
+    .container-main__sources:before {
+        content: 'available game rooms';
+    }
+
+    .container-main__sources div {
+        text-align: left;
+        width: calc(33.33% - 30px);
+        margin: 15px;
+    }
+
+.container-main__build {
+    padding: 10vh 10vw;
+    border-radius: 8px;
+    background: #f9f9f9;
+    position: relative;
+}
+
+    .container-main__build:before {
+        content: 'your profile';
+    }
+
+    .container-main__build div {
+        margin: 2rem 0;
+    }
+
+        .container-main__build div svg {
+            width: 4rem;
+            height: auto;
+            fill: #5027d5;
+        }
+
+.container-main__deploy {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    position: relative;
+}
+
+    .container-main__deploy:before {
+        content: 'settings';
+    }
+
+.footer-text {
+    font-size: 18px;
+    color: #555;
+    font-weight: 600;
+}
+
+@media (max-width: 700px) {
+    .container-main__sources {
+        flex-direction: column;
+    }
+
+        .container-main__sources div {
+            margin: 1rem 0;
+        }
+}
+
+@-moz-keyframes animateline {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: -5rem;
+    }
+}
+
+@-webkit-keyframes animateline {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: -5rem;
+    }
+}
+
+@-o-keyframes animateline {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: -5rem;
+    }
+}
+
+@keyframes animateline {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: -5rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.form-game {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.game-wrapp h1 {
+    text-align: center;
+}
+
+.game-wrapp #hands {
+    text-align: center;
+}
+
+.game-wrapp input:checked ~ div .hand {
+    animation: none !important;
+}
+
+.message-info-text {
+    font-size: 40px;
+}
+
+.message-info-icon {
+    font-size: 35px;
+}
+
+.message-info-text.you-win {
+    color: #80cc28;
+}
+
+.overview-title {
+    font-size: 30px;
+}
+
+.overview-text {
+    color: #5027d5;
+    font-size: 20px;
+}
+
+.score-header {
+    border: 2px solid #555;
+}
+
+.score-header p {
+    font-size: 50px;
+    color: #555;
+}
+
+.score-body {
+    border: 2px solid #555;
+    border-top: none;
+    font-size: 35px;
+    color: #555;
+}
+
+.score-body p {
+    font-size: 35px;
+    color: #555;
+}
+
+.score-separate {
+    border-right: 2px solid #555;
+}
+
+.message-info.you-lose {
+    color: #f1511b;
+}
+
+.hand {
+    margin: 20px;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    transform: rotate(10deg);
+    display: inline-block;
+    animation: handShake 2s infinite;
+}
+
+    .hand > div {
+        position: absolute;
+        box-sizing: border-box;
+        border: 2px solid black;
+        background: gold;
+        transition: all 0.1s;
+    }
+
+.fist {
+    height: 110px;
+    left: 40px;
+    top: 50px;
+    width: 90px;
+    border-radius: 20px 0 0 20px;
+}
+
+.finger {
+    width: 70px;
+    height: 30px;
+    border-radius: 20px;
+    left: 80px;
+    transform-origin: 0 50%;
+}
+
+.finger-1 {
+    top: 50px;
+    --dif: 0px;
+}
+
+.finger-2 {
+    top: 78px;
+    left: 84px;
+    --dif: 4px;
+}
+
+.finger-3 {
+    top: 106px;
+    --dif: 0px;
+}
+
+.finger-4 {
+    top: 134px;
+    height: 26px;
+    left: 76px;
+    --dif: -8px;
+}
+
+div.thumb {
+    width: 35px;
+    height: 70px;
+    border-radius: 0 20px 20px 20px;
+    top: 50px;
+    left: 80px;
+    border-left: 0 solid;
+    box-shadow: -17px 6px 0 -15px black;
+}
+
+div.arm {
+    width: 22px;
+    height: 70px;
+    left: 20px;
+    top: 70px;
+    border: 0;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+#user-hand {
+    transform: rotateY(180deg);
+    animation: handShake2 2s infinite;
+    position: relative;
+}
+
+#user-hand.scissors .finger-1,
+#computer-hand.scissors .finger-1 {
+    width: 130px;
+    transform: rotate(-5deg);
+}
+
+#user-hand.scissors .finger-2,
+#computer-hand.scissors .finger-2 {
+    width: 130px;
+    transform: rotate(5deg);
+}
+
+#user-hand.paper .finger-1,
+#user-hand.paper .finger-2,
+#user-hand.paper .finger-3,
+#user-hand.paper .finger-4,
+#computer-hand.paper .finger-1,
+#computer-hand.paper .finger-2,
+#computer-hand.paper .finger-3,
+#computer-hand.paper .finger-4 {
+    left: 124px;
+    left: calc(124px + var(--dif));
+    width: 80px;
+    border-left: 0;
+    border-radius: 0 20px 20px 0;
+}
+
+#hands {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#icons {
+    width: 30px;
+    height: 200px;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+#icons > div {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    position: relative;
+}
+
+
+.game-wrapp label:active {
+    position: static;
+    margin-left: 60px;
+}
+
+.game-wrapp label:active::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    z-index: 10;
+    height: 60px;
+}
+
+
+.game-wrapp label {
+    animation: changeOrder 0.45s infinite linear;
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    height: 60px;
+    width: 60px;
+    line-height: 60px;
+    font-size: 2rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    user-select: none;
+}
+
+    .game-wrapp label:nth-of-type(1) {
+        animation-delay: -0.00s;
+    }
+
+    .game-wrapp label:nth-of-type(2) {
+        animation-delay: -0.15s;
+    }
+
+    .game-wrapp label:nth-of-type(3) {
+        animation-delay: -0.30s;
+    }
+
+@keyframes changeOrder {
+    from {
+        z-index: 9;
+    }
+
+    to {
+        z-index: 1;
+    }
+}
+
+@keyframes handShake {
+    0%,100% {
+        transform: rotate(10deg);
+    }
+
+    50% {
+        transform: rotate(-10deg);
+    }
+}
+
+@keyframes handShake2 {
+    0%,100% {
+        transform: rotateY(180deg) rotate(10deg);
+    }
+
+    50% {
+        transform: rotateY(180deg) rotate(-10deg);
+    }
 }

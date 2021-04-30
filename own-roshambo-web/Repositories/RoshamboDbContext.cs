@@ -11,6 +11,9 @@ namespace OwnRoshamboWeb.Repositories
         public DbSet<User> Users { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<UserGame> UserGames { get; set; }
+        public DbSet<GameRoom> GameRoom { get; set; }
+        public DbSet<Connection> Connection { get; set; }
+
         public RoshamboDbContext(DbContextOptions<RoshamboDbContext> options) : base(options)
         {
         }

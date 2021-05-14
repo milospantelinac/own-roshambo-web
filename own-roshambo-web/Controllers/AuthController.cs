@@ -11,15 +11,18 @@ namespace OwnRoshamboWeb.Controllers
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;
+
         public AuthController(IAuthService authService)
         {
             _authService = authService;
         }
+
         public IActionResult Login()
         {
             var model = new LoginViewModel();
             return View(model);
         }
+
         [HttpPost]
         public async Task<ActionResult> Login([FromForm] LoginViewModel loginModel)
         {

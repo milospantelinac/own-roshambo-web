@@ -21,10 +21,14 @@ namespace OwnRoshamboWeb.Migrations
 
             modelBuilder.Entity("OwnRoshamboWeb.Repositories.Models.Connection", b =>
                 {
-                    b.Property<int>("ConnectionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConnectionId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("Contected")
                         .HasColumnType("bit");
@@ -33,12 +37,9 @@ namespace OwnRoshamboWeb.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.HasKey("UserId", "RoomId", "ConnectionId");
 
-                    b.HasKey("ConnectionId");
-
-                    b.HasIndex("UserId");
+                    b.HasIndex("RoomId");
 
                     b.ToTable("Connection");
                 });
@@ -79,19 +80,15 @@ namespace OwnRoshamboWeb.Migrations
             modelBuilder.Entity("OwnRoshamboWeb.Repositories.Models.GameRoom", b =>
                 {
                     b.Property<int>("RoomId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("RoomName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("RoomId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("GameRoom");
                 });
@@ -193,11 +190,19 @@ namespace OwnRoshamboWeb.Migrations
 
             modelBuilder.Entity("OwnRoshamboWeb.Repositories.Models.Connection", b =>
                 {
+                    b.HasOne("OwnRoshamboWeb.Repositories.Models.GameRoom", "GameRoom")
+                        .WithMany()
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("OwnRoshamboWeb.Repositories.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("GameRoom");
 
                     b.Navigation("User");
                 });
@@ -207,17 +212,6 @@ namespace OwnRoshamboWeb.Migrations
                     b.HasOne("OwnRoshamboWeb.Repositories.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("OwnRoshamboWeb.Repositories.Models.GameRoom", b =>
-                {
-                    b.HasOne("OwnRoshamboWeb.Repositories.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("User");
                 });

@@ -5,7 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OwnRoshamboWeb.Extensions;
+using OwnRoshamboWeb.Hubs;
 using System;
+using Owin;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -27,7 +29,7 @@ namespace OwnRoshamboWeb
         {
             var appSettingsSection = Configuration.GetSection(nameof(AppSettings));
             var appSettings = appSettingsSection.Get<AppSettings>();
- 
+
             services
                 .Configure<AppSettings>(appSettingsSection)
                 .RegisterServices()
@@ -35,6 +37,12 @@ namespace OwnRoshamboWeb
                 .RegisterJwtAuthentication(appSettings.JwtTokenSecret, true)
                 .AddHttpContextAccessor()
                 .AddControllersWithViews();
+            services.AddSignalR(hubOptions => 
+            {
+                hubOptions.EnableDetailedErrors = true;
+                hubOptions.KeepAliveInterval = TimeSpan.FromMinutes(3);
+                hubOptions.ClientTimeoutInterval = TimeSpan.FromMinutes(6);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +79,7 @@ namespace OwnRoshamboWeb
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<GameHub>("/gameHub");
             });
         }
     }

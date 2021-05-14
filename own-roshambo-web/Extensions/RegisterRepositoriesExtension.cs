@@ -12,7 +12,8 @@ namespace OwnRoshamboWeb.Extensions
         {
             return services
                 .AddDbContext<RoshamboDbContext>(options => options.UseSqlServer(connectionString))
-                .AddScoped<IUserRepository, UserRepository>();
+                .AddScoped<IUserRepository, UserRepository>()
+                .AddScoped<IGameRepository, GameRepository>();
         }
         public static IApplicationBuilder MigrateDatabase(this IApplicationBuilder builder)
         {

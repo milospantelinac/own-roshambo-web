@@ -2,6 +2,8 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+var userConnectionId;
+
 $(document).on('click', '.login-accounts-trigger', function () {
     $(this).removeClass('is-active');
     $('.login-accounts-panel').addClass('is-active');
@@ -54,6 +56,11 @@ var formHtml = `<div class="d-flex justify-content-center"><form class="w-50">
   </div>
 </form><div>`;
 
+var gameCard = `<div class="sources--data">
+    <h3 class="card-title d-flex align-items-center"></h3>
+    <p class="card-text"></p>
+</div>`;
+
 function getType(type) {
     let currentType;
     switch (type) {
@@ -79,8 +86,9 @@ function overviewGameHtml(result) {
     return overviewGameHtml;
 }
 
+var gameRoom;
+
 $(document).on('click', '.create-game', function () {
-    var isValid;
     Swal.mixin({
         width: 800,
         confirmButtonText: 'Next &rarr;',
@@ -117,7 +125,7 @@ $(document).on('click', '.create-game', function () {
             confirmButtonText: 'Create Game',
             showCancelButton: true,
             onOpen: function () {
-                console.log(result)
+                gameRoom = result.value;
                 if (result.value[0] && result.value[1]) {
                     $(".swal2-confirm").removeAttr('disabled', 'disabled');
 
@@ -125,6 +133,87 @@ $(document).on('click', '.create-game', function () {
                     $(".swal2-confirm").attr('disabled', 'disabled');
                 }
             }
+        }).then(() => {
+            CreateRoom(gameRoom);
         })
     })
 });
+
+$(function () {
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl('https://localhost:5001/gamehub')
+        .withAutomaticReconnect()
+        .build();
+
+    connection.keepAliveIntervalInMilliseconds = 1000 * 60 * 3; // Three minutes
+    connection.serverTimeoutInMilliseconds = 1000 * 60 * 6; // Six minutes
+
+    async function start() {
+        try {
+            await connection.start()
+        } catch (err) {
+            console.log(err);
+            setTimeout(start, 5000);
+        }
+    }
+
+    //connection.onclose(start);
+    start();
+
+    connection.on("ListAvaibleRooms", (connectionId, rooms) => {
+        $('.container-main__sources').html('');
+        userConnectionId = connectionId;
+        rooms.forEach(function (room, index) {
+            $('.container-main__sources').append(gameCard);
+            $(`.card-title:eq(${index})`).append(`<span class="site-dot mr-2">&#128994;</span>${room.roomName}`);
+            if (room.members < 2) {
+                $(`.card-text:eq(${index})`).append(`Members: <span class="member-count">${room.members}/2</span>`);
+                $(`.sources--data:eq(${index})`).append(`<button type="button" class="btn btn-blue">Join in room</button>`);
+            } else {
+                $(`.card-text:eq(${index})`).append(`Members: <span class="member-count">${room.members}/2</span><span class="card-text__status member-status"> (is full)</span>`);
+                $(`.sources--data:eq(${index})`).append(`<button type="button" class="btn btn-blue" disabled>Join in room</button>`);
+            }
+        });
+    });
+
+    connection.on('JoinInRoom', (connectionId, roomId) => {
+        userConnectionId = connectionId;
+        //window.location = `https://localhost:5001/game?id=${roomId}`;
+        JoinRoom(roomId);
+    });
+
+    connection.on('InGame', (connectionId, roomId) => {
+        userConnectionId = connectionId;
+        window.location = `https://localhost:5001/game?id=${roomId}`;
+    });
+});
+
+function CreateRoom(gameRoom) {
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        url: `https://localhost:5001/game/createroom`,
+        data: JSON.stringify({ 'roomName': gameRoom[1], 'connectionId': userConnectionId }),
+        success: function(result) {
+            console.log(result);
+            //addNewGameRound(gameRound);
+        },
+        error: function () {
+        }
+    });
+}
+
+function JoinRoom(roomId) {
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        url: `https://localhost:5001/game/joinroom`,
+        data: JSON.stringify({ 'roomId': roomId, 'connectionId': userConnectionId }),
+        success: function (result) {
+            console.log(result);
+            //addNewGameRound(gameRound);
+        },
+        error: function () {
+        }
+    });
+}

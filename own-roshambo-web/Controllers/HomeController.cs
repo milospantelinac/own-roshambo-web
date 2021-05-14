@@ -21,8 +21,12 @@ namespace OwnRoshamboWeb.Controllers
 
         public IActionResult Index()
         {
-            var model = _tokenHelper.GetUserFromClaims(User.Claims);
-            return View(model);
+            return View(_tokenHelper.GetUserFromClaims(User.Claims));
+        }
+
+        public IActionResult Room()
+        {
+            return View();
         }
 
         public IActionResult Privacy()

@@ -379,6 +379,7 @@ p {
     padding: 1.5rem;
     background: #f9f9f9;
     position: relative;
+    min-width: 970px;
     max-width: 970px;
     flex-wrap: wrap;
 }

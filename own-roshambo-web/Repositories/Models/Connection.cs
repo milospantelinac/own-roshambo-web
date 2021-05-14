@@ -5,12 +5,11 @@ namespace OwnRoshamboWeb.Repositories.Models
 {
     public class Connection
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ConnectionId { get; set; }
-
         public int UserId { get; set; }
         public virtual User User { get; set; }
+        public int RoomId { get; set; }
+        public virtual GameRoom GameRoom { get; set; }
+        public string ConnectionId { get; set; }
 
         [MaxLength(255)]
         public string UserAgent { get; set; }

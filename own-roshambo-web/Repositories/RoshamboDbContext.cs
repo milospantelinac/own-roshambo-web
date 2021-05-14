@@ -21,6 +21,7 @@ namespace OwnRoshamboWeb.Repositories
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasIndex(u => u.Username).IsUnique();
+            modelBuilder.Entity<Connection>().HasKey(x => new { x.UserId, x.RoomId, x.ConnectionId });
 
             modelBuilder.Entity<User>().HasData(new User
             {
@@ -62,6 +63,7 @@ namespace OwnRoshamboWeb.Repositories
                 Score = 0,
             });
         }
+
         private byte[] HasPassword(string password)
         {
             var passwordWithSalt = $"{password}8jrxT9mDEMhkLrqxUr8wxsg5bt3uqZ";
